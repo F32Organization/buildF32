@@ -1,31 +1,18 @@
 #!/bin/bash
 
-#Restart web server
-/usr/bin/nginx -s stop
-/usr/bin/nginx
-GIT_DIR="/usr/share/nginx/faithful/git"
-WWW_DIR="/usr/share/nginx/faithful/www"
-ZIP_FILE="latest.zip"
-# Fetch changes.
-cd "$GIT_DIR"
-if (( $(git pull | grep -c 'Already up-to-date') ))
-then
-  if [ -e "$WWW_DIR/$ZIP_FILE" ]
-  then
-    exit 0
-  fi
-fi
-# Package resource pack
-rm "$ZIP_FILE"
-zip -0 -rq "$ZIP_FILE" assets Reika pack.mcmeta pack.png README.md
-
-if [ -e "$WWW_DIR/$ZIP_FILE" ]
-then
-  if [ $(md5sum "$ZIP_FILE" | awk '{print $1}') == $(md5sum "$WWW_DIR/$ZIP_FILE" | awk '{print $1}') ]
-  then
-    exit 0
-  fi
-fi
-
-cp -f "$ZIP_FILE" "$WWW_DIR/$ZIP_FILE"
+#Switch to fetching directory
+cd /var/www/html/faithful/git
+#Empty fetching directory
+rm -r *
+#Fetch latest Git repository and name latest.zip
+wget https://github.com/smenes/Faithful32/archive/faithful32_1.6.4.zip -O latest.zip
+#Unpack latest.zip
+unzip latest.zip
+#Switch to unpacked directory within fetching directory
+cd /var/www/html/faithful/git/Faithful32-faithful32_1.6.4
+#Package contents of unpacked directory into F32.zip with compression off, silent mode on, and recursive mode on
+zip -0 -rq F32.zip *
+#Copy F32.zip to web directory, replacing old version
+cp -f F32.zip /var/www/html/faithful
+#Exit the script with code reading successful
 exit 0
