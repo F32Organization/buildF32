@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Switch to fetching directory
-cd /var/www/html/faithful/git
+cd ./git
 #Fetch latest Git repositories.
 wget https://github.com/F32Organization/Faithful32-1.6.4/archive/master.zip -O 1.6.4.zip
 wget https://github.com/F32Organization/Faithful32-1.7.10/archive/master.zip -O 1.7.10.zip
@@ -9,7 +9,7 @@ wget https://github.com/F32Organization/Faithful32-1.7.10/archive/master.zip -O 
 unzip 1.6.4.zip
 unzip 1.7.10.zip
 #Switch to unpacked directory for 1.6.4
-cd /var/www/html/faithful/git/Faithful32-1.6.4-master
+cd ./Faithful32-1.6.4-master
 #Remove TODO folder and any *.md files
 rm -r TODO/ ; rm *.md
 #Package contents of unpacked directory into .zip file with silent and recursive modes on
