@@ -10,12 +10,16 @@ unzip 1.6.4.zip
 unzip 1.7.10.zip
 #Switch to unpacked directory for 1.6.4
 cd /var/www/html/faithful/git/Faithful32-1.6.4-master
+#remove useless files
+rm -r TODO/ ; rm -r sources/ ; rm *.md
 #Package contents of unpacked directory into .zip file with silent and recursive modes on
 zip -rq F32-1.6.4.zip *
 #Copy .zip file to web directory, replacing old version forcefully
 cp -f F32-1.6.4.zip /var/www/html/faithful
 #Switch to unpacked directory for 1.7.10
 cd /var/www/html/faithful/git/Faithful32-1.7.10-master
+#remove useless files
+rm -r TODO/ ; rm *.md
 #Package contents of unpacked directory into .zip file with silent and recursive modes on
 zip -rq F32-1.7.10.zip *
 #Copy .zip file to web directory, replacing old version forcefully
