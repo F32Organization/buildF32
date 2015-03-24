@@ -6,7 +6,7 @@ SUM1="new164sum.md5"
 SUM2="new1710sum.md5"
 SUM3="old164sum.md5"
 SUM4="old1710sum.md5"
-GIT="/var/www/html/faithful/git"
+GIT="/var/www/f32.me/public_html/git"
 
 #Switch to git directory.
 cd ./git
@@ -36,7 +36,7 @@ else
 	#Package contents of unpacked directory into .zip file with silent and recursive modes on.
 	zip -rq F32-1.6.4.zip *
 	#Copy .zip file to web directory, replacing old version forcefully.
-	cp -f F32-1.6.4.zip /var/www/html/faithful
+	cp -f F32-1.6.4.zip /var/www/f32.me/public_html
 	#Switch to git directory.
 	cd $GIT
 	#Remove unpacked folders.
@@ -69,7 +69,7 @@ else
 	#Package contents of unpacked directory into .zip file with silent and recursive modes on.
 	zip -rq F32-1.7.10.zip *
 	#Copy .zip file to web directory, replacing old version forcefully.
-	cp -f F32-1.7.10.zip /var/www/html/faithful
+	cp -f F32-1.7.10.zip /var/www/f32.me/public_html
 	#Switch to git directory.
 	cd $GIT
 	#Remove unpacked folders.
