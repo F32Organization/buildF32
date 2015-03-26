@@ -65,7 +65,7 @@ else
 	#Switch to unpacked directory for 1.7.10.
 	cd ./Faithful32-1.7.10-master
 	#Remove TODO folder and any *.md files.
-	rm -r TODO/ ; rm *.md ; rm -r OldMoDTextures/
+	rm -r TODO/ ; rm *.md ; rm -r OldModTextures/
 	#Package contents of unpacked directory into .zip file with silent and recursive modes on.
 	zip -rq F32-1.7.10.zip *
 	#Copy .zip file to web directory, replacing old version forcefully.
