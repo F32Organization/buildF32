@@ -7,9 +7,10 @@ SUM2="new1710sum.md5"
 SUM3="old164sum.md5"
 SUM4="old1710sum.md5"
 GIT="/var/www/f32.me/public_html/git"
+BASE="/var/www/f32.me/public_html"
 
 #Switch to git directory.
-cd ./git
+cd $GIT
 #Fetch latest Git repositories.
 wget --no-verbose https://github.com/F32Organization/Faithful32-1.6.4/archive/master.zip -O $DL1
 wget --no-verbose https://github.com/F32Organization/Faithful32-1.7.10/archive/master.zip -O $DL2
@@ -82,6 +83,22 @@ else
 	#Delete old downloaded file.
 	rm $DL2
 fi
+
+#Switch back to main directory.
+cd $BASE
+
+#Delete old md5 hash values.
+rm 1710sum.md5
+rm 164sum.md5
+
+#Calculate new md5 hash values.
+md5sum F32-1.6.4.zip > 164sum.md5
+md5sum F32-1.7.10.zip > 1710sum.md5
+
+#Strip file names from new checksum files. (Depends on replace command installed by package "mysql-server").
+replace "F32-1.6.4.zip" "" -- 164sum.md5
+replace "F32-1.7.10.zip" "" -- 1710sum.md5
+
 
 #Exit the script with code 0 to indicate success. (Not currently used)
 exit 0
