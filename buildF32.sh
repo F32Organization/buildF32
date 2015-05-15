@@ -1,17 +1,25 @@
 #!/bin/bash
 
+#Name of downloaded 1.6.4 repository.
 DL1="164.zip"
+#Name of downloaded 1.7.10 repository.
 DL2="1710.zip"
+#Name of md5 checksum file for downloaded 1.6.4 repository.
 SUM1="new164sum.md5"
+#Name of md5 checksum file for downloaded 1.7.10 repository.
 SUM2="new1710sum.md5"
+#Name of md5 checksum file for currently available 1.6.4 pack.
 SUM3="old164sum.md5"
+#Name of md5 checksum file for currently available 1.7.10 pack.
 SUM4="old1710sum.md5"
+#Folder where script actions take place, downloading and unzipping
 GIT="/var/www/f32.me/public_html/git"
+#Folder which contains publicly available packs and checksum files. Also known as web directory.
 BASE="/var/www/f32.me/public_html"
 
-#Switch to git directory.
+#Switch to Git directory.
 cd $GIT
-#Fetch latest Git repositories.
+#Fetch latest Github repositories.
 wget --no-verbose https://github.com/F32Organization/Faithful32-1.6.4/archive/master.zip -O $DL1
 wget --no-verbose https://github.com/F32Organization/Faithful32-1.7.10/archive/master.zip -O $DL2
 #Generate MD5 checksums for new downloaded files.
@@ -20,8 +28,8 @@ md5sum $DL2 > $SUM2
 #Strip file names from new checksum files before comparing sums. (Depends on replace command installed by package "mysql-server").
 replace "164.zip" "" -- $SUM1
 replace "1710.zip" "" -- $SUM2
-#Compare MD5 checksums of new downloaded files to old downloaded files. This decides which (if any) portions of the script need to run.
 #1.6.4 Handling.
+#If there is no difference between the old and new checksum files, skip 1.6.4 pack build.
 if diff $SUM3 $SUM1 >/dev/null ; then
 	echo Skipping 1.6.4 build portion.
 	#Delete the new download and checksum because they are unused.
@@ -55,6 +63,7 @@ fi
 cd $GIT
 
 #1.7.10 Handling.
+#If there is no difference between the old and new checksum files, skip 1.7.10 pack build.
 if diff $SUM4 $SUM2 >/dev/null ; then
 	echo Skipping 1.7.10 build portion.
 	#Delete the new download and checksum because they are unused.
@@ -100,5 +109,5 @@ replace "F32-1.6.4.zip" "" -- 164sum.md5
 replace "F32-1.7.10.zip" "" -- 1710sum.md5
 
 
-#Exit the script with code 0 to indicate success. (Not currently used)
+#Exit the script with code 0 to indicate success. (Not currently used).
 exit 0
