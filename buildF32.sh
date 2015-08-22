@@ -67,7 +67,7 @@ if [ "$B164" == "true" ] ; then
 	#Switch to unpacked directory for 1.6.4.
 	cd ./Faithful32-1.6.4-master
 	#Remove TODO folder and any *.md files.
-	rm -r TODO/ ; rm *.md
+	rm -r TODO/ ; rm *.md ; DevModTextures/
 	#Package contents of unpacked directory into .zip file with silent and recursive modes on.
 	zip -rq F32-1.6.4.zip *
 	#Copy .zip file to web directory, replacing old version forcefully.
